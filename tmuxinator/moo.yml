@@ -1,0 +1,48 @@
+# ~/.tmuxinator/moo.yml
+
+name: moo
+root: ~/
+
+# Optional tmux socket
+# socket_name: foo
+
+# Runs before everything. Use it to start daemons etc.
+# pre: sudo /etc/rc.d/mysqld start
+
+# Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
+# pre_window: rbenv shell 2.0.0-p247
+
+# Pass command line options to tmux. Useful for specifying a different tmux.conf.
+# tmux_options: -f ~/.tmux.mac.conf
+
+# Change the command to call tmux.  This can be used by derivatives/wrappers like byobu.
+# tmux_command: byobu
+
+# Specifies (by name or index) which window will be selected on project startup. If not set, the first window is used.
+# startup_window: logs
+
+# Controls whether the tmux session should be attached to automatically. Defaults to true.
+# attach: false
+
+# Runs after everything. Use it to attach to tmux with custom options etc.
+# post: tmux -CC attach -t moo
+
+windows:
+  - loaders:
+      layout: main-horizonal
+      panes:
+        - workon loaders; cd code/loaders/python; ipython
+        - workon loaders; cd code/loaders/python
+  - models: cd code/models 
+  - gummi: 
+      layout: main-horizontal
+      panes:
+        - workon gummi; cd src/gummi; python manage.py shell_plus
+        - workon gummi
+  - shark: workon shark 
+  - btng: 
+      layout: layout 8538,119x60,0,0[119x30,0,0{59x30,0,0,6,59x30,60,0,8},119x29,0,31,7]
+      panes:
+        - workon newbackend; cd code/btng; python manage.py runserver_plus
+        - cd code/btng; npm run watch
+        - workon newbackend; cd code/btng
