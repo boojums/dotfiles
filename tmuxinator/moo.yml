@@ -3,6 +3,8 @@
 name: moo
 root: ~/
 
+# To get layout info for your current layout use:tmux  tmux list-windows
+
 # Optional tmux socket
 # socket_name: foo
 
